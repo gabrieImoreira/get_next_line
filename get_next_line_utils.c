@@ -6,7 +6,7 @@
 /*   By: gantonio <gantonio@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/16 20:54:10 by gantonio          #+#    #+#             */
-/*   Updated: 2021/06/16 22:50:49 by gantonio         ###   ########.fr       */
+/*   Updated: 2021/06/17 19:15:54 by gantonio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ size_t	ft_strlen(const char *str)
 	return (i);
 }
 
-char	*ft_strchr(const char *str, int c)
+int	ft_strchr(const char *str, int c)
 {
 	size_t	i;
 
@@ -62,9 +62,9 @@ char	*ft_strchr(const char *str, int c)
 	while (1)
 	{
 		if (str[i] == (unsigned char)c)
-			return ((char *)str + i);
+			return (1);
 		if (!str[i])
-			return (NULL);
+			return (0);
 		i++;
 	}
 }

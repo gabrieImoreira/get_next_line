@@ -6,7 +6,7 @@
 /*   By: gantonio <gantonio@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/09 23:17:45 by gantonio          #+#    #+#             */
-/*   Updated: 2021/06/16 23:50:28 by gantonio         ###   ########.fr       */
+/*   Updated: 2021/06/17 19:56:49 by gantonio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,11 @@ void	ft_bzero(void *str, size_t len)
 	while (len--)
 		*ptr++ = '\0';
 }
+
+// static char *ft_return_new_line(void *str)
+// {
+	
+// }
 
 int get_next_line(int fd, char **line)
 {
@@ -37,19 +42,23 @@ int get_next_line(int fd, char **line)
 	buf = malloc(sizeof(char) * BUFFER_SIZE + 1);
 	ret = read(fd, buf, BUFFER_SIZE);
 	new_line = malloc(sizeof(char) * BUFFER_SIZE + 1);
-	temp = malloc(sizeof(char) * BUFFER_SIZE - len + 1);
+	temp = malloc(sizeof(char) * BUFFER_SIZE + 1);
 
-	if(!repository)
+	if (!repository)
 		repository = malloc(sizeof(char) * BUFFER_SIZE + 1);
 	repository = ft_strjoin(repository, buf);
 	
-	while (repository[++len] != '\n')
-	 	new_line[len] = repository[len];
-	while (repository[len++] && len < BUFFER_SIZE)
+	if(ft_strchr(repository, '\n')){
+		while (repository[++len] != '\n' && len <= BUFFER_SIZE)
+	 		new_line[len] = repository[len];
+	}
+	//printf("nl:%s\n\n", new_line);
+	while (repository[len++])
 		temp[i++] = repository[len];
 	ft_bzero(repository, ft_strlen(repository));
 	repository = ft_strjoin(repository, temp);
 	
+	//printf("\n\nrp:%s\n", repository);
 	*line = new_line;
 	//*line = repository;
 	//*line = temp;
