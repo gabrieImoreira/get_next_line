@@ -6,7 +6,7 @@
 /*   By: gantonio <gantonio@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/09 23:17:45 by gantonio          #+#    #+#             */
-/*   Updated: 2021/06/14 19:02:49 by gantonio         ###   ########.fr       */
+/*   Updated: 2021/06/16 22:44:52 by gantonio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,26 @@
 int get_next_line(int fd, char **line)
 {
 	int ret;
-	char buf;
+	char *buf;
+	size_t len;
+	char *temp;
+	static char *repository;
 	
-	buf = **line;
-	ret = read(fd, buf, BUF_SIZE);
-	ft_putstr_fd(buf, 1);
+	len = -1;
+	buf = malloc(sizeof(char) * BUFFER_SIZE + 1);
+	ret = read(fd, buf, BUFFER_SIZE);
+	repository = malloc(sizeof(char) * BUFFER_SIZE + 1);
+	
+	//repository = 
+	while (buf[++len] != '\n')
+	 	repository[len] = buf[len];
+	// while (buf[len])
+	// {
+	// 	repository[len] = buf[len];
+	// 	len++;
+	// }
+	
+	*line = repository;
 
+	return(ret);
 }
