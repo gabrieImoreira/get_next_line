@@ -6,7 +6,7 @@
 /*   By: gantonio <gantonio@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/29 19:27:11 by lcandido          #+#    #+#             */
-/*   Updated: 2021/06/16 21:41:07 by gantonio         ###   ########.fr       */
+/*   Updated: 2021/06/16 23:50:45 by gantonio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,18 +49,27 @@ int main(void)
 	buf = malloc(sizeof(char) * BUFFER_SIZE + 1);
 	current_file = "./examples/test1";
 	fd = open(current_file, O_RDONLY);
-	//test_gnl(fd, current_file);
+	test_gnl(fd, current_file);
 
-	ret = get_next_line(fd, &buf);
-	if (ret == -1)
-		printf("ERRO: '%d'\n", ret);
-	else
-	 	printf("LINE 1: '%s'\n", buf);	
-	ret = get_next_line(fd, &buf);
-	if (ret == -1)
-		printf("ERRO: '%d'\n", ret);
-	else
-	 	printf("LINE 1: '%s'\n", buf);	
+	// ret = get_next_line(fd, &buf);
+	// if (ret == -1)
+	// 	printf("ERRO: '%d'\n", ret);
+	// else
+	//  	printf("LINE 1:\n '%s'\n", buf);	
+	// ret = get_next_line(fd, &buf);
+	// if (ret == -1)
+	// 	printf("ERRO: '%d'\n", ret);
+	// else
+	//  	printf("LINE 2:\n '%s'\n", buf);
+	// ret = get_next_line(fd, &buf);
+	// if (ret == -1)
+	// 	printf("ERRO: '%d'\n", ret);
+	// else
+	//  	printf("LINE 3:\n '%s'\n", buf);
+
+
+
+	
 	// ret = read(fd, buf, BUFFER_SIZE);
 	// if (ret == -1)
 	// 	printf("ERRO: '%d'\n", ret);
