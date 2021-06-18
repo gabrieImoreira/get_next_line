@@ -6,7 +6,7 @@
 /*   By: gantonio <gantonio@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/09 23:17:45 by gantonio          #+#    #+#             */
-/*   Updated: 2021/06/17 22:18:40 by gantonio         ###   ########.fr       */
+/*   Updated: 2021/06/18 00:19:01 by gantonio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,10 +47,7 @@ static char	*ft_return_new_line(int fd, char *buf, char *repository, int *ret)
 		new_line[len] = repository[len];
 	new_line[len] = '\0';
 	while (repository[++len])
-	{
-		temp[i] = repository[len];
-		i++;
-	}
+		temp[i++] = repository[len];
 	ft_bzero(repository, ft_strlen(repository));
 	repository = ft_strjoin(repository, temp);
 	free(temp);
@@ -67,7 +64,6 @@ int	get_next_line(int fd, char **line)
 
 	ret = malloc(sizeof(int));
 	buf = malloc(sizeof(char) * BUFFER_SIZE + 1);
-	new_line = malloc(sizeof(char) * BUFFER_SIZE + 1);
 	if (!repository)
 		repository = malloc(sizeof(char) * BUFFER_SIZE + 1);
 	*line = ft_return_new_line(fd, buf, repository, ret);
