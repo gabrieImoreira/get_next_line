@@ -6,7 +6,7 @@
 /*   By: gantonio <gantonio@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/29 19:27:11 by lcandido          #+#    #+#             */
-/*   Updated: 2021/06/17 22:17:36 by gantonio         ###   ########.fr       */
+/*   Updated: 2021/06/20 16:55:38 by gantonio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ int main(void)
 			break;
 		else
 			printf("LINE %d:'%s'\n", i, buf);
+		free(buf);
 	}
 	// current_file = "./examples/example_files/test2";
 	// current_file_descriptor = open(current_file, O_RDONLY);
