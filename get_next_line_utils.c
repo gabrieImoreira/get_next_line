@@ -6,7 +6,7 @@
 /*   By: gantonio <gantonio@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/16 20:54:10 by gantonio          #+#    #+#             */
-/*   Updated: 2021/06/19 00:34:41 by gantonio         ###   ########.fr       */
+/*   Updated: 2021/06/20 14:37:27 by gantonio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,14 +54,16 @@ size_t	ft_strlen(const char *str)
 	return (i);
 }
 
-int	ft_strchr(const char *str, int c)
+int	ft_is_new_line(const char *str)
 {
 	size_t	i;
 	
 	i = 0;
+	if (!str)
+		return (0);
 	while (str[i])
 	{
-		if (str[i] == (unsigned char)c)
+		if (str[i] == '\n')
 			return (1);
 		i++;
 	}

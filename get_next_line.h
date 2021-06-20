@@ -10,7 +10,7 @@
 
 int		get_next_line(int fd, char **line);
 char	*ft_strdup(char *src);
-int		ft_strchr(const char *str, int c);
+int		ft_is_new_line(const char *str);
 size_t	ft_strlcat(char *dest, const char *src, size_t size);
 size_t	ft_strlcpy(char *dest, const char *src, size_t size);
 size_t	ft_strlen(const char *str);
