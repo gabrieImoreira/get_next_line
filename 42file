@@ -1,1 +1,0 @@
-In some programming languages such as C (and its close descendants like C++, Objective-C, and Java), static is a reserved word controlling both lifetime (as a static variable) and visibility (depending on linkage). The effect of the keyword varies depending on the details of the specific programming language.
