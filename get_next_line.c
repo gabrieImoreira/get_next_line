@@ -1,102 +1,71 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: gantonio <gantonio@student.42sp.org.br>    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/06/09 23:17:45 by gantonio          #+#    #+#             */
-/*   Updated: 2021/06/20 16:57:46 by gantonio         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "get_next_line.h"
 #include <stdio.h>
 
-char	*ft_update_buffer(char *save)
+char	*ft_clean_repository(char *str)
 {
-	char	*rtn;
+	char	*repo;
+	int		len;
 	int		i;
-	int		j;
 
+	len = 0;
 	i = 0;
-	j = 0;
-	if (!save)
+	if (!str)
 		return (0);
-	while (save[i] && save[i] != '\n')
-		i++;
-	if (!save[i])
+	while (str[len] && str[len] != '\n')
+		len++;
+	if (!str[len])
 	{
-		free(save);
+		free(str);
 		return (0);
 	}
-	if (!(rtn = malloc(sizeof(char) * ((ft_strlen(save) - i) + 1))))
+	repo = malloc(sizeof(char) * ((ft_strlen(str) - len) + 1));
+	if (!repo)
 		return (0);
-	i++;
-	while (save[i])
-		rtn[j++] = save[i++];
-	rtn[j] = '\0';
-	free(save);
-	return (rtn);
+	while (str[++len])
+		repo[i++] = str[len];
+	repo[i] = '\0';
+	free(str);
+	return (repo);
 }
-static char	*ft_return_new_line(int fd, char *buf, char *repository, int *ret)
+
+static char	*ft_return_new_line(char *str)
 {
 	int		len;
-	int		bytes_read;
 	char	*new_line;
-	char	*temp;
-	int i;
-	
+
 	len = 0;
-	bytes_read = 1;
-	temp = malloc(sizeof(char) * BUFFER_SIZE + 1);
-	if(!temp)
-		return (NULL);
-	if(!new_line)
-		return (NULL);
-	while (!ft_is_new_line(repository) && bytes_read != 0)
-	{
-		bytes_read = read(fd, buf, BUFFER_SIZE);
-		buf[bytes_read] = '\0';
-		repository = ft_strjoin(repository, buf);
-		//printf("\nstrlcpy -> rep end: |%s|", repository);
-	}
-	repository[ft_strlen(repository) + 1] = '\0';
-	free(buf);
-	//printf("\nrep FORA: |%s|\n", repository);
-	if(!repository)
+	if (!str)
 		return (0);
-	while (repository[len] != '\n' && repository[len])
+	while (str[len] && str[len] != '\n')
 		len++;
-	new_line = malloc(sizeof(char) * BUFFER_SIZE + 1);
-	if(!new_line)
+	new_line = malloc(sizeof(char) * (len + 1));
+	if (!new_line)
 		return (0);
 	len = -1;
-	while (repository[++len] != '\n' && repository[len])
-		new_line[len] = repository[len];
+	while (str[++len] && str[len] != '\n')
+		new_line[len] = str[len];
 	new_line[len] = '\0';
-	//printf("\nrep FORA: |%s|\n", repository);
-	*ret = bytes_read;
 	return (new_line);
 }
 
 int	get_next_line(int fd, char **line)
 {
-	char		*buf;
-	char		*new_line;
-	int			*ret;
-	static char	repository[BUFFER_SIZE + 1];
+	char		buf[BUFFER_SIZE + 1];
+	int			bytes_read;
+	static char	*repository;
 
-	ret = malloc(sizeof(int));
-	buf = malloc(sizeof(char) * (BUFFER_SIZE + 1));
-	if(!buf)
-		return (-1);
-	*line = ft_return_new_line(fd, buf, &repository, ret);
-	//printf("\nrep FORA: |%s|\n", repository);
-	if(ret > 0)
-		return (1);
-	else if(ret < 0)
-		return (-1);
-	else
+	bytes_read = 1;
+	while (!ft_is_new_line(repository) && bytes_read > 0)
+	{
+		bytes_read = read(fd, buf, BUFFER_SIZE);
+		if (bytes_read == -1)
+			return (-1);
+		buf[bytes_read] = '\0';
+		repository = ft_strjoin(repository, buf);
+	}
+	*line = ft_return_new_line(repository);
+	repository = ft_clean_repository(repository);
+	if (bytes_read == 0)
 		return (0);
+	return (1);
 }

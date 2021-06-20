@@ -6,7 +6,7 @@
 /*   By: gantonio <gantonio@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/29 19:27:11 by lcandido          #+#    #+#             */
-/*   Updated: 2021/06/20 16:55:38 by gantonio         ###   ########.fr       */
+/*   Updated: 2021/06/20 18:33:59 by gantonio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,19 +49,19 @@ int main(void)
 	buf = malloc(sizeof(char) * BUFFER_SIZE + 1);
 	current_file = "./examples/test1";
 	fd = open(current_file, O_RDONLY);
-	//test_gnl(fd, current_file);
+	test_gnl(fd, current_file);
 
-	for(int i = 1; i < 10; i++)
-	{
-		ret = get_next_line(fd, &buf);
-		if (ret == -1)
-			printf("ERRO: '%d'\n", ret);
-		if (ret == 0)
-			break;
-		else
-			printf("LINE %d:'%s'\n", i, buf);
-		free(buf);
-	}
+	// for(int i = 1; i < 10; i++)
+	// {
+	// 	ret = get_next_line(fd, &buf);
+	// 	if (ret == -1)
+	// 		printf("ERRO: '%d'\n", ret);
+	// 	if (ret == 0)
+	// 		break;
+	// 	else
+	// 		printf("LINE %d:'%s'\n", i, buf);
+	// 	free(buf);
+	// }
 	// current_file = "./examples/example_files/test2";
 	// current_file_descriptor = open(current_file, O_RDONLY);
 	// test_gnl(current_file_descriptor, current_file);
