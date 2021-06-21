@@ -6,7 +6,7 @@
 /*   By: gantonio <gantonio@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/16 20:54:10 by gantonio          #+#    #+#             */
-/*   Updated: 2021/06/20 19:41:51 by gantonio         ###   ########.fr       */
+/*   Updated: 2021/06/20 21:10:05 by gantonio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,8 +67,6 @@ int	ft_is_new_line(const char *str)
 
 char	*ft_strjoin(char const *s1, char const *s2)
 {
-	size_t	s1_len;
-	size_t	s2_len;
 	size_t	len;
 	char	*repo;
 
