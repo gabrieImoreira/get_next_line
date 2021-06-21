@@ -6,13 +6,13 @@
 /*   By: gantonio <gantonio@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/20 21:41:34 by gantonio          #+#    #+#             */
-/*   Updated: 2021/06/20 21:41:38 by gantonio         ###   ########.fr       */
+/*   Updated: 2021/06/21 19:28:26 by gantonio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-char	*ft_clean_repository(char *str)
+char	*ft_fix_repository(char *str)
 {
 	char	*repo;
 	int		len;
@@ -21,13 +21,13 @@ char	*ft_clean_repository(char *str)
 	len = 0;
 	i = 0;
 	if (!str)
-		return (0);
+		return (NULL);
 	while (str[len] && str[len] != '\n')
 		len++;
 	if (!str[len])
 	{
 		free(str);
-		return (0);
+		return (NULL);
 	}
 	repo = malloc(sizeof(char) * ((ft_strlen(str) - len) + 1));
 	if (!repo)
@@ -46,12 +46,12 @@ static char	*ft_return_new_line(char *str)
 
 	len = 0;
 	if (!str)
-		return (0);
+		return (NULL);
 	while (str[len] && str[len] != '\n')
 		len++;
 	new_line = malloc(sizeof(char) * (len + 1));
 	if (!new_line)
-		return (0);
+		return (NULL);
 	len = -1;
 	while (str[++len] && str[len] != '\n')
 		new_line[len] = str[len];
@@ -62,23 +62,23 @@ static char	*ft_return_new_line(char *str)
 int	get_next_line(int fd, char **line)
 {
 	char		buf[BUFFER_SIZE + 1];
-	int			bytes_read;
+	long int			bytes_read;
 	static char	*repository;
 
 	bytes_read = 1;
-	if (fd < 0 || !line)
-		return (-1);
+	if (fd < 0 || !line || BUFFER_SIZE <= 0)
+		return (GNL_ERROR);
 	while (!ft_is_new_line(repository) && bytes_read > 0)
 	{
 		bytes_read = read(fd, buf, BUFFER_SIZE);
 		if (bytes_read == -1)
-			return (-1);
+			return (GNL_ERROR);
 		buf[bytes_read] = '\0';
 		repository = ft_strjoin(repository, buf);
 	}
 	*line = ft_return_new_line(repository);
-	repository = ft_clean_repository(repository);
+	repository = ft_fix_repository(repository);
 	if (bytes_read == 0)
-		return (0);
-	return (1);
+		return (GNL_EOF);
+	return (GNL_LINEBREAK);
 }

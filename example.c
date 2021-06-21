@@ -6,7 +6,7 @@
 /*   By: gantonio <gantonio@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/29 19:27:11 by lcandido          #+#    #+#             */
-/*   Updated: 2021/06/20 21:12:26 by gantonio         ###   ########.fr       */
+/*   Updated: 2021/06/21 19:22:27 by gantonio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,10 @@ int main(void)
 	fd = open(current_file, O_RDONLY);
 	test_gnl(fd, current_file);
 
-	// for(int i = 1; i < 10; i++)
+	// int ret;
+	// char *buf;
+	// buf = malloc((sizeof(char)) * BUFFER_SIZE + 1);
+	// for(int i = 1; i < 20; i++)
 	// {
 	// 	ret = get_next_line(fd, &buf);
 	// 	if (ret == -1)

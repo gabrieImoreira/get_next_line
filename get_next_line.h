@@ -1,12 +1,16 @@
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H
 
+# include <unistd.h>
+# include <stdlib.h>
+
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 42
 # endif
 
-# include <unistd.h>
-# include <stdlib.h>
+# define GNL_LINEBREAK 1
+# define GNL_EOF 0
+# define GNL_ERROR -1
 
 int		get_next_line(int fd, char **line);
 int		ft_is_new_line(const char *str);
