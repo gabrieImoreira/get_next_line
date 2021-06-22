@@ -6,7 +6,7 @@
 /*   By: gantonio <gantonio@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/20 21:41:34 by gantonio          #+#    #+#             */
-/*   Updated: 2021/06/21 23:29:04 by gantonio         ###   ########.fr       */
+/*   Updated: 2021/06/22 17:32:42 by gantonio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,23 +59,37 @@ static char	*ft_return_new_line(char *str)
 	return (new_line);
 }
 
-int	get_next_line(int fd, char **line)
+static int	ft_read_and_join(int fd, char **repository, char *buf)
 {
-	char		buf[BUFFER_SIZE + 1];
-	long int	bytes_read;
-	static char	*repository;
+	int	bytes_read;
 
 	bytes_read = 1;
-	if (fd < 0 || !line)
-		return (GNL_ERROR);
-	while (!ft_is_new_line(repository) && bytes_read > 0)
+	while (!ft_is_new_line(*repository) && bytes_read > 0)
 	{
 		bytes_read = read(fd, buf, BUFFER_SIZE);
 		if (bytes_read == -1)
 			return (GNL_ERROR);
 		buf[bytes_read] = '\0';
-		repository = ft_strjoin(repository, buf);
+		*repository = ft_strjoin(*repository, buf);
 	}
+	return (bytes_read);
+}
+
+int	get_next_line(int fd, char **line)
+{
+	char		*buf;
+	long int	bytes_read;
+	static char	*repository;
+
+	if (fd < 0 || !line || BUFFER_SIZE <= 0)
+		return (GNL_ERROR);
+	buf = malloc(sizeof(char) * BUFFER_SIZE + 1);
+	if (!buf)
+		return (GNL_ERROR);
+	bytes_read = ft_read_and_join(fd, &repository, buf);
+	free(buf);
+	if (bytes_read == -1)
+		return (GNL_ERROR);
 	*line = ft_return_new_line(repository);
 	repository = ft_fix_repository(repository);
 	if (bytes_read == 0)
