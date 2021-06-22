@@ -6,7 +6,7 @@
 /*   By: gantonio <gantonio@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/29 19:27:11 by lcandido          #+#    #+#             */
-/*   Updated: 2021/06/21 19:22:27 by gantonio         ###   ########.fr       */
+/*   Updated: 2021/06/21 22:47:03 by gantonio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,25 +42,16 @@ static void test_gnl(int file_descriptor, char const *current_file)
 int main(void)
 {
 	char const *current_file;
-	int fd;
+	int current_file_descriptor;
+	int current_file_descriptor2;
+	
 	current_file = "./examples/test1";
-	fd = open(current_file, O_RDONLY);
-	test_gnl(fd, current_file);
+	current_file_descriptor = open(current_file, O_RDONLY);
+	current_file_descriptor2 = open("./examples/41_with_nl", O_RDONLY);  
+	test_gnl(10, current_file);
+	test_gnl(current_file_descriptor2, current_file);
+	
 
-	// int ret;
-	// char *buf;
-	// buf = malloc((sizeof(char)) * BUFFER_SIZE + 1);
-	// for(int i = 1; i < 20; i++)
-	// {
-	// 	ret = get_next_line(fd, &buf);
-	// 	if (ret == -1)
-	// 		printf("ERRO: '%d'\n", ret);
-	// 	if (ret == 0)
-	// 		break;
-	// 	else
-	// 		printf("LINE %d:'%s'\n", i, buf);
-	// 	free(buf);
-	// }
 	// current_file = "./examples/example_files/test2";
 	// current_file_descriptor = open(current_file, O_RDONLY);
 	// test_gnl(current_file_descriptor, current_file);

@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gantonio <gantonio@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/20 21:41:34 by gantonio          #+#    #+#             */
-/*   Updated: 2021/06/21 23:29:04 by gantonio         ###   ########.fr       */
+/*   Updated: 2021/06/21 23:29:22 by gantonio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 char	*ft_fix_repository(char *str)
 {
@@ -63,21 +63,21 @@ int	get_next_line(int fd, char **line)
 {
 	char		buf[BUFFER_SIZE + 1];
 	long int	bytes_read;
-	static char	*repository;
+	static char	*repository[FD_SETSIZE];
 
 	bytes_read = 1;
 	if (fd < 0 || !line)
 		return (GNL_ERROR);
-	while (!ft_is_new_line(repository) && bytes_read > 0)
+	while (!ft_is_new_line(repository[fd]) && bytes_read > 0)
 	{
 		bytes_read = read(fd, buf, BUFFER_SIZE);
 		if (bytes_read == -1)
 			return (GNL_ERROR);
 		buf[bytes_read] = '\0';
-		repository = ft_strjoin(repository, buf);
+		repository[fd] = ft_strjoin(repository[fd], buf);
 	}
-	*line = ft_return_new_line(repository);
-	repository = ft_fix_repository(repository);
+	*line = ft_return_new_line(repository[fd]);
+	repository[fd] = ft_fix_repository(repository[fd]);
 	if (bytes_read == 0)
 		return (GNL_EOF);
 	return (GNL_LINEBREAK);
