@@ -6,11 +6,12 @@
 /*   By: gantonio <gantonio@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/20 21:41:34 by gantonio          #+#    #+#             */
-/*   Updated: 2021/06/22 17:32:42 by gantonio         ###   ########.fr       */
+/*   Updated: 2021/06/22 23:28:41 by gantonio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+#include <stdio.h>
 
 char	*ft_fix_repository(char *str)
 {
@@ -78,7 +79,7 @@ static int	ft_read_and_join(int fd, char **repository, char *buf)
 int	get_next_line(int fd, char **line)
 {
 	char		*buf;
-	long int	bytes_read;
+	int			bytes_read;
 	static char	*repository;
 
 	if (fd < 0 || !line || BUFFER_SIZE <= 0)

@@ -6,7 +6,7 @@
 /*   By: gantonio <gantonio@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/29 19:27:11 by lcandido          #+#    #+#             */
-/*   Updated: 2021/06/22 17:05:52 by gantonio         ###   ########.fr       */
+/*   Updated: 2021/06/22 20:16:42 by gantonio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,10 +45,10 @@ int main(void)
 	int current_file_descriptor;
 	//int current_file_descriptor2;
 	
-	current_file = "./examples/test1";
+	current_file = "./examples/empty";
 	current_file_descriptor = open(current_file, O_RDONLY);
 	//current_file_descriptor2 = open("./examples/41_with_nl", O_RDONLY);  
-	test_gnl(current_file_descriptor, current_file);
+	test_gnl(1250834982, current_file);
 	//test_gnl(current_file_descriptor2, current_file);
 	
 
